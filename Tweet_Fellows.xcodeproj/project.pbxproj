@@ -16,6 +16,7 @@
 		EC7592A61A5B37C9000DC445 /* tweet.json in Resources */ = {isa = PBXBuildFile; fileRef = EC7592A51A5B37C9000DC445 /* tweet.json */; };
 		EC7592AB1A5B38AE000DC445 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7592AA1A5B38AE000DC445 /* Tweet.swift */; };
 		ECAD57B41A5B3DBE00945F74 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAD57B31A5B3DBE00945F74 /* TweetCell.swift */; };
+		ECAD57BA1A5C99E400945F74 /* AustinJackson.png in Resources */ = {isa = PBXBuildFile; fileRef = ECAD57B91A5C99E400945F74 /* AustinJackson.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		EC7592A51A5B37C9000DC445 /* tweet.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tweet.json; sourceTree = "<group>"; };
 		EC7592AA1A5B38AE000DC445 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		ECAD57B31A5B3DBE00945F74 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
+		ECAD57B91A5C99E400945F74 /* AustinJackson.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AustinJackson.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 				EC7592891A5B3703000DC445 /* Main.storyboard */,
 				ECAD57B31A5B3DBE00945F74 /* TweetCell.swift */,
 				EC75928E1A5B3703000DC445 /* LaunchScreen.xib */,
+				ECAD57B91A5C99E400945F74 /* AustinJackson.png */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 			files = (
 				EC75928B1A5B3703000DC445 /* Main.storyboard in Resources */,
 				EC7592901A5B3703000DC445 /* LaunchScreen.xib in Resources */,
+				ECAD57BA1A5C99E400945F74 /* AustinJackson.png in Resources */,
 				EC75928D1A5B3703000DC445 /* Images.xcassets in Resources */,
 				EC7592A61A5B37C9000DC445 /* tweet.json in Resources */,
 			);
