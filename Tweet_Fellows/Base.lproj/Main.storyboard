@@ -36,11 +36,18 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BiG-Rp-0Wh">
+                                                    <rect key="frame" x="125" y="69" width="187" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="tweetImageView" destination="5gb-IE-cDo" id="9gl-w9-xjp"/>
                                             <outlet property="tweetLabel" destination="HmS-Zw-KCh" id="rCY-RL-ikI"/>
+                                            <outlet property="userNameLabel" destination="BiG-Rp-0Wh" id="HJp-74-O6x"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -54,7 +61,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="360" y="379"/>
+            <point key="canvasLocation" x="360" y="378"/>
         </scene>
     </scenes>
 </document>
