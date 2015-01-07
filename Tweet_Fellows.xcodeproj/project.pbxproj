@@ -15,6 +15,7 @@
 		EC75929C1A5B3703000DC445 /* Tweet_FellowsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC75929B1A5B3703000DC445 /* Tweet_FellowsTests.swift */; };
 		EC7592A61A5B37C9000DC445 /* tweet.json in Resources */ = {isa = PBXBuildFile; fileRef = EC7592A51A5B37C9000DC445 /* tweet.json */; };
 		EC7592AB1A5B38AE000DC445 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7592AA1A5B38AE000DC445 /* Tweet.swift */; };
+		ECA208E41A5DD5A900C185BB /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA208E31A5DD5A900C185BB /* NetworkController.swift */; };
 		ECAD57B41A5B3DBE00945F74 /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECAD57B31A5B3DBE00945F74 /* TweetCell.swift */; };
 		ECAD57BA1A5C99E400945F74 /* AustinJackson.png in Resources */ = {isa = PBXBuildFile; fileRef = ECAD57B91A5C99E400945F74 /* AustinJackson.png */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,7 @@
 		EC75929B1A5B3703000DC445 /* Tweet_FellowsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tweet_FellowsTests.swift; sourceTree = "<group>"; };
 		EC7592A51A5B37C9000DC445 /* tweet.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tweet.json; sourceTree = "<group>"; };
 		EC7592AA1A5B38AE000DC445 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
+		ECA208E31A5DD5A900C185BB /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		ECAD57B31A5B3DBE00945F74 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 		ECAD57B91A5C99E400945F74 /* AustinJackson.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AustinJackson.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				EC7592871A5B3703000DC445 /* ViewController.swift */,
+				ECA208E31A5DD5A900C185BB /* NetworkController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECA208E41A5DD5A900C185BB /* NetworkController.swift in Sources */,
 				EC7592AB1A5B38AE000DC445 /* Tweet.swift in Sources */,
 				EC7592881A5B3703000DC445 /* ViewController.swift in Sources */,
 				EC7592861A5B3703000DC445 /* AppDelegate.swift in Sources */,

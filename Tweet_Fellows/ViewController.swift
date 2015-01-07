@@ -14,49 +14,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
   @IBOutlet weak var tableView: UITableView!
   var tweets = [Tweet]()
+  let networkController = NetworkController()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    let accountStore = ACAccountStore()
-    let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
-    accountStore.requestAccessToAccountsWithType(accountType, options: nil) { (granted, error) -> Void in
-      if granted {
-        let accounts = accountStore.accountsWithAccountType(accountType)
-        if !accounts.isEmpty {
-          let twitterAccount = accounts.first as ACAccount
-          let requestURL = NSURL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json")
-          let twitterRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: requestURL, parameters: nil)
-          twitterRequest.account = twitterAccount
-          twitterRequest.performRequestWithHandler() { (data, response, error) -> Void in
-            switch response.statusCode {
-            case 200...299:
-              println("Shabooyah")
-              
-              if let jsonArray = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? [AnyObject] {
-                for object in jsonArray {
-                  if let jsonDictionary = object as? [String : AnyObject] {
-                    let tweet = Tweet(jsonDictionary)
-                    self.tweets.append(tweet)
-                    NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                    
-                    self.tableView.reloadData()
-                    })
-                  }
-                }
-              }
-            case 300...599:
-              println("Not good...")
-            default:
-              println("Default thing happended a bit")
-              }
-            }
-          }
-        }
-      }
-      
+          
     self.tableView.dataSource = self
     self.tableView.delegate = self
+    
+    self.networkController.fetchHomeTimeline { (tweets, errorString) -> () in
+      if errorString == nil {
+        self.tweets = tweets!
+        self.tableView.reloadData()
+      } else {
+        //Bad Stuff! Should probably give user an error message.
+      }
+    }
   }
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
