@@ -19,15 +19,15 @@ class TweetDetailController: UIViewController {
   @IBOutlet weak var tweetFaveLabel: UILabel!
   
     override func viewDidLoad() {
-        super.viewDidLoad()
+      super.viewDidLoad()
       self.userNameLabel.text = self.tweet.username
       self.tweetLabel.text = self.tweet.text
+      self.userPictureButton.setImage(tweet.image, forState: UIControlState.Normal)
       
       self.networkController.fetchTweetInfo(tweet.tweetID, completionHandler: { (infoDictionary, errorMessage) -> () in
-        println(infoDictionary)
         if errorMessage == nil {
         self.tweet.updateWithInfo(infoDictionary!)
-          self.tweetFaveLabel.text = self.tweet.favoriteCount
+        self.tweetFaveLabel.text = self.tweet.favoriteCount
         }
       })
         // Do any additional setup after loading the view.
@@ -35,8 +35,9 @@ class TweetDetailController: UIViewController {
 
   @IBAction func userImagePressed(sender: AnyObject) {
     let userTimelineVC = self.storyboard?.instantiateViewControllerWithIdentifier("USER_TIMELINE") as UserTimelineViewController
+    userTimelineVC.networkController = self.networkController
+    userTimelineVC.userName = tweet.username
     self.navigationController?.pushViewController(userTimelineVC, animated: true)
-
   }
   
     override func didReceiveMemoryWarning() {
@@ -44,3 +45,4 @@ class TweetDetailController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 }
+

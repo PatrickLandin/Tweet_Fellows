@@ -50,8 +50,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //        self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
         cell.tweetImageView.image = tweet.image
       })
-    } else {
-      cell.tweetImageView.image = tweet.image
     }
     return cell
   }

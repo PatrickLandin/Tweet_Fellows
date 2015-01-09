@@ -8,28 +8,44 @@
 
 import UIKit
 
-class UserTimelineViewController: UIViewController {
+class UserTimelineViewController: UIViewController, UITableViewDataSource {
+  
+  @IBOutlet weak var tableView: UITableView!
+  var networkController : NetworkController!
+  var userName : String?
+  var userTweets = [Tweet]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+//      self.networkController.fetchUserTimeline(Tweet, completionHandler: { (<#[Tweet]?#>, <#String?#>) -> (Void) in
+//        <#code#>
+//      })
 
+      self.tableView.dataSource = self
         // Do any additional setup after loading the view.
     }
+  
+  
+  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return self.userTweets.count
+  }
 
+  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCellWithIdentifier("TWEET_CELL", forIndexPath: indexPath) as TweetCell
+    let tweet = self.userTweets[indexPath.row]
+    cell.tweetLabel.text = tweet.text
+    cell.userNameLabel.text = tweet.username
+    if tweet.image == nil {
+      self.networkController.fetchImageForTweet(tweet, completionHandler: { (image) -> (Void) in
+        //        self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
+        cell.tweetImageView.image = tweet.image
+      })
+    }
+    return cell
+  }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

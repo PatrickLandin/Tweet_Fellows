@@ -15,6 +15,7 @@ class Tweet {
   var image : UIImage?
   var tweetID : String
   var favoriteCount : String?
+  var screenName : String?
   
   init ( _ jsonDictionary : [String : AnyObject]) {
     self.text = jsonDictionary["text"] as String
@@ -29,4 +30,9 @@ class Tweet {
     self.favoriteCount = "\(favorites)"
     }
   }
-}
+  
+  func updateUserTimeline(userDictionary : [String : AnyObject]) {
+    let userScreenName = userDictionary["screen_name"] as String
+      self.screenName = "\(screenName)"
+    }
+  }

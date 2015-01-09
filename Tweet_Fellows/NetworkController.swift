@@ -91,10 +91,34 @@ class NetworkController {
     }
   }
   
-  func fetchUserTimeline(
-  
-  
-  
-  
-  
+  func fetchUserTimeline(screenName : String, completionHandler : ([Tweet]?, String?) -> ()) {
+    let requestURL = NSURL(string: "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=\(screenName)")
+    let twitterRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: requestURL, parameters: nil)
+    twitterRequest.account = self.twitterAccount
+    twitterRequest.performRequestWithHandler() { (data, response, error) -> Void in
+      switch response.statusCode {
+      case 200...299:
+        println("fetch user timeline worked!")
+        
+        if let jsonArray = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? [AnyObject] {
+          var tweets = [Tweet]()
+          for object in jsonArray {
+            if let jsonDictionary = object as? [String : AnyObject] {
+              let tweet = Tweet(jsonDictionary)
+              tweets.append(tweet)
+            }
+          }
+          NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+            completionHandler(tweets, nil)
+          })
+        }
+        
+      case 300...599:
+        println("Not good...")
+        completionHandler(nil, "A bad thing happened")
+      default:
+        println("Default thing happended a bit")
+      }
+    }
+  }
 }
