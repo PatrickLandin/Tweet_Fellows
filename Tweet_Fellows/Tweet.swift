@@ -13,9 +13,12 @@ class Tweet {
   var username : String
   var imageURL : String
   var image : UIImage?
+  var backgroundImage : UIImage?
   var tweetID : String
   var favoriteCount : String?
   var userID : String
+  var userBackground : String
+  var userLocation : String
   
   init ( _ jsonDictionary : [String : AnyObject]) {
     self.text = jsonDictionary["text"] as String
@@ -24,6 +27,8 @@ class Tweet {
     self.tweetID = jsonDictionary["id_str"] as String
     self.imageURL = userDictionary["profile_image_url"] as String
     self.userID = userDictionary["id_str"] as String
+    self.userBackground = userDictionary["profile_background_image_url_https"] as String
+    self.userLocation = userDictionary["location"] as String
   }
   
   func updateWithInfo(infoDictionary : [String: AnyObject]) {

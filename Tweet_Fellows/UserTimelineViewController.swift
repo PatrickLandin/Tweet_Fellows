@@ -10,22 +10,36 @@ import UIKit
 
 class UserTimelineViewController: UIViewController, UITableViewDataSource {
   
+  @IBOutlet weak var userBackgroundView: UIImageView!
+  @IBOutlet weak var headerNameLabel: UILabel!
+  @IBOutlet weak var headerLocationLabel: UILabel!
   @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var headerImageView: UIImageView!
   var networkController : NetworkController!
   var userID : String!
+  var userTweet : Tweet!
   var userTweets : [Tweet]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+      self.userBackgroundView.image = self.userTweet.image
+      self.headerNameLabel.text = self.userTweet.username
+      self.headerImageView.image = self.userTweet.image
+      self.headerLocationLabel.text = self.userTweet.userLocation
       self.tableView.dataSource = self
       self.tableView.estimatedRowHeight = 100
       self.tableView.rowHeight = UITableViewAutomaticDimension
       self.tableView.registerNib(UINib(nibName: "TweetCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "TWEET_CELL")
+      
       self.networkController.fetchUserTimeline(self.userID, completionHandler: { (tweets, errorMessage) -> (Void) in
         self.userTweets = tweets
         self.tableView.reloadData()
       })
-        // Do any additional setup after loading the view.
+      
+      self.networkController.fetchUserBackgroundImage(self.userTweet, completionHandler: { (image) -> () in
+        self.userBackgroundView.image = image
+        self.tableView.reloadData()
+      })
     }
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -40,7 +54,7 @@ class UserTimelineViewController: UIViewController, UITableViewDataSource {
     let cell = tableView.dequeueReusableCellWithIdentifier("TWEET_CELL", forIndexPath: indexPath) as TweetCell
     let tweet = self.userTweets![indexPath.row]
     cell.tweetLabel.text = tweet.text
-    cell.userNameLabel.text = tweet.userID
+    cell.userNameLabel.text = tweet.username
     if tweet.image == nil {
       self.networkController.fetchImageForTweet(tweet, completionHandler: { (image) -> (Void) in
         //        self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)

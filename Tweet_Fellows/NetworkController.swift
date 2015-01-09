@@ -77,7 +77,7 @@ class NetworkController {
             }
           }
 
-  func fetchImageForTweet(tweet : Tweet, completionHandler: (UIImage?) -> (Void)) {
+  func fetchImageForTweet(tweet : Tweet, completionHandler: (UIImage?) -> ()) {
     // Image download
     if let imageURL = NSURL(string: tweet.imageURL) {
       self.imageQueue.addOperationWithBlock({ () -> Void in
@@ -85,6 +85,20 @@ class NetworkController {
           tweet.image = UIImage(data: imageData)
           NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
             completionHandler(tweet.image)
+          })
+        }
+      })
+    }
+  }
+  
+  func fetchUserBackgroundImage(tweet : Tweet, completionHandler: (UIImage?) -> ()) {
+    // Image download
+    if let imageURL = NSURL(string: tweet.userBackground) {
+      self.imageQueue.addOperationWithBlock({ () -> Void in
+        if let backgroundImageData = NSData(contentsOfURL: imageURL) {
+          tweet.backgroundImage = UIImage(data: backgroundImageData)
+          NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+            completionHandler(tweet.backgroundImage)
           })
         }
       })

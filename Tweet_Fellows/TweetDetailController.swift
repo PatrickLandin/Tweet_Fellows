@@ -37,6 +37,7 @@ class TweetDetailController: UIViewController {
     let userTimelineVC = self.storyboard?.instantiateViewControllerWithIdentifier("USER_TIMELINE") as UserTimelineViewController
     userTimelineVC.networkController = self.networkController
     userTimelineVC.userID = self.tweet.userID
+    userTimelineVC.userTweet = self.tweet
     self.navigationController?.pushViewController(userTimelineVC, animated: true)
   }
   
