@@ -13,13 +13,6 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5HQ-yc-UZG" id="VGi-qI-kJE">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qp3-gv-F9F">
-                        <rect key="frame" x="8" y="8" width="50" height="50"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="50" id="jLE-9r-vkP"/>
-                            <constraint firstAttribute="width" constant="50" id="xId-tY-LnK"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYF-dE-8QX">
                         <rect key="frame" x="66" y="8" width="36" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -32,11 +25,19 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qp3-gv-F9F">
+                        <rect key="frame" x="8" y="8" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="jLE-9r-vkP"/>
+                            <constraint firstAttribute="width" constant="50" id="xId-tY-LnK"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="enI-md-QeM" firstAttribute="trailing" secondItem="VGi-qI-kJE" secondAttribute="trailingMargin" id="7Jr-Df-EqQ"/>
                     <constraint firstItem="enI-md-QeM" firstAttribute="top" secondItem="QYF-dE-8QX" secondAttribute="bottom" constant="8" id="DCL-da-oSI"/>
                     <constraint firstItem="enI-md-QeM" firstAttribute="leading" secondItem="QYF-dE-8QX" secondAttribute="leading" id="LJE-DH-gkh"/>
+                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="Qp3-gv-F9F" secondAttribute="bottom" constant="8" id="NWO-ZN-Kqj"/>
                     <constraint firstItem="Qp3-gv-F9F" firstAttribute="top" secondItem="VGi-qI-kJE" secondAttribute="topMargin" id="Twz-YE-DHe"/>
                     <constraint firstItem="Qp3-gv-F9F" firstAttribute="top" secondItem="QYF-dE-8QX" secondAttribute="top" id="Xm2-pU-CKc"/>
                     <constraint firstItem="enI-md-QeM" firstAttribute="bottom" secondItem="VGi-qI-kJE" secondAttribute="bottomMargin" id="d5G-6V-odl"/>

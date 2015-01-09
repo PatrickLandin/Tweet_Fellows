@@ -91,8 +91,8 @@ class NetworkController {
     }
   }
   
-  func fetchUserTimeline(screenName : String, completionHandler : ([Tweet]?, String?) -> ()) {
-    let requestURL = NSURL(string: "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=\(screenName)")
+  func fetchUserTimeline(userID : String, completionHandler : ([Tweet]?, String?) -> ()) {
+    let requestURL = NSURL(string: "https://api.twitter.com/1.1/statuses/user_timeline.json?user_id=\(userID)")
     let twitterRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: requestURL, parameters: nil)
     twitterRequest.account = self.twitterAccount
     twitterRequest.performRequestWithHandler() { (data, response, error) -> Void in

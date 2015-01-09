@@ -22,7 +22,7 @@ class TweetDetailController: UIViewController {
       super.viewDidLoad()
       self.userNameLabel.text = self.tweet.username
       self.tweetLabel.text = self.tweet.text
-      self.userPictureButton.setImage(tweet.image, forState: UIControlState.Normal)
+      self.userPictureButton.setBackgroundImage(self.tweet.image!, forState: UIControlState.Normal)
       
       self.networkController.fetchTweetInfo(tweet.tweetID, completionHandler: { (infoDictionary, errorMessage) -> () in
         if errorMessage == nil {
@@ -31,12 +31,12 @@ class TweetDetailController: UIViewController {
         }
       })
         // Do any additional setup after loading the view.
-    }
+    }  //VDL
 
   @IBAction func userImagePressed(sender: AnyObject) {
     let userTimelineVC = self.storyboard?.instantiateViewControllerWithIdentifier("USER_TIMELINE") as UserTimelineViewController
     userTimelineVC.networkController = self.networkController
-    userTimelineVC.userName = tweet.username
+    userTimelineVC.userID = self.tweet.userID
     self.navigationController?.pushViewController(userTimelineVC, animated: true)
   }
   
