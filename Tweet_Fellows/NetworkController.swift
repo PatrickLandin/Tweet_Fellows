@@ -1,10 +1,3 @@
-//
-//  NetworkController.swift
-//  Tweet_Fellows
-//
-//  Created by Patrick Landin on 1/7/15.
-//  Copyright (c) 2015 Patrick Landin. All rights reserved.
-//
 
 import Foundation
 import Accounts
@@ -13,6 +6,7 @@ import Social
 class NetworkController {
   
   var twitterAccount : ACAccount?
+  var imageQueue = NSOperationQueue()
   
   init() {
     //empty init fancy time because because of the optional property
@@ -26,14 +20,15 @@ class NetworkController {
       if granted {
         let accounts = accountStore.accountsWithAccountType(accountType)
         if !accounts.isEmpty {
-          let twitterAccount = accounts.first as ACAccount
+          self.twitterAccount = accounts.first as? ACAccount
+          // finished with getting twitter account access
           let requestURL = NSURL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json")
           let twitterRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: requestURL, parameters: nil)
-          twitterRequest.account = twitterAccount
+          twitterRequest.account = self.twitterAccount
           twitterRequest.performRequestWithHandler() { (data, response, error) -> Void in
             switch response.statusCode {
             case 200...299:
-              println("Shabooyah")
+              println("fetch home timeline worked!")
               
               if let jsonArray = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? [AnyObject] {
                 var tweets = [Tweet]()
@@ -58,8 +53,48 @@ class NetworkController {
         }
       }
     }
-
-    
-    
   }
+  
+  func fetchTweetInfo(tweetID : String, completionHandler : ([String :AnyObject]?, String?) -> (Void)) {
+    
+          let requestURL = NSURL(string: "https://api.twitter.com/1.1/statuses/show.json?id=\(tweetID)")
+          let twitterRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: requestURL!, parameters: nil)
+          twitterRequest.account = self.twitterAccount
+    
+          twitterRequest.performRequestWithHandler() { (data, response, error) -> Void in
+            switch response.statusCode {
+            case 200...299:
+              println("fetch tweet info worked!")
+              
+            if let jsonDictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? [String : AnyObject] {
+                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                  completionHandler(jsonDictionary, nil)
+                  })
+                }
+            default:
+              println("default thing happened a bit")
+              }
+            }
+          }
+
+  func fetchImageForTweet(tweet : Tweet, completionHandler: (UIImage?) -> (Void)) {
+    // Image download
+    if let imageURL = NSURL(string: tweet.imageURL) {
+      self.imageQueue.addOperationWithBlock({ () -> Void in
+        if let imageData = NSData(contentsOfURL: imageURL) {
+          tweet.image = UIImage(data: imageData)
+          NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+            completionHandler(tweet.image)
+          })
+        }
+      })
+    }
+  }
+  
+  func fetchUserTimeline(
+  
+  
+  
+  
+  
 }

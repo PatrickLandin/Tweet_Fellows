@@ -21,6 +21,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
           
     self.tableView.dataSource = self
     self.tableView.delegate = self
+    self.tableView.registerNib(UINib(nibName: "TweetCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "TWEET_CELL")
+    self.tableView.estimatedRowHeight = 100
+
+    self.tableView.rowHeight = UITableViewAutomaticDimension
     
     self.networkController.fetchHomeTimeline { (tweets, errorString) -> () in
       if errorString == nil {
@@ -41,11 +45,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let tweet = self.tweets[indexPath.row]
     cell.tweetLabel.text = tweet.text
     cell.userNameLabel.text = tweet.username
-    let imgURL = NSURL(string: tweet.imageURL!)
-    let imageData = NSData(contentsOfURL: imgURL!)
-    let cellImage = UIImage(data: imageData!)
-    cell.tweetImage.image = cellImage
+    if tweet.image == nil {
+      self.networkController.fetchImageForTweet(tweet, completionHandler: { (image) -> (Void) in
+//        self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
+        cell.tweetImageView.image = tweet.image
+      })
+    } else {
+      cell.tweetImageView.image = tweet.image
+    }
     return cell
   }
+  
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    let tweetVC = self.storyboard?.instantiateViewControllerWithIdentifier("TWEET_VC") as TweetDetailController
+    tweetVC.networkController = self.networkController
+    tweetVC.tweet = self.tweets[indexPath.row]
+    self.navigationController?.pushViewController(tweetVC, animated: true)
+  }
 }
+
 

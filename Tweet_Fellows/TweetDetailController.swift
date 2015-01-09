@@ -9,27 +9,38 @@
 import UIKit
 
 class TweetDetailController: UIViewController {
-
+  
+  var tweet : Tweet!
+  var networkController : NetworkController!
+  
+  @IBOutlet weak var userPictureButton: UIButton!
+  @IBOutlet weak var userNameLabel: UILabel!
+  @IBOutlet weak var tweetLabel: UILabel!
+  @IBOutlet weak var tweetFaveLabel: UILabel!
+  
     override func viewDidLoad() {
         super.viewDidLoad()
-
+      self.userNameLabel.text = self.tweet.username
+      self.tweetLabel.text = self.tweet.text
+      
+      self.networkController.fetchTweetInfo(tweet.tweetID, completionHandler: { (infoDictionary, errorMessage) -> () in
+        println(infoDictionary)
+        if errorMessage == nil {
+        self.tweet.updateWithInfo(infoDictionary!)
+          self.tweetFaveLabel.text = self.tweet.favoriteCount
+        }
+      })
         // Do any additional setup after loading the view.
     }
 
+  @IBAction func userImagePressed(sender: AnyObject) {
+    let userTimelineVC = self.storyboard?.instantiateViewControllerWithIdentifier("USER_TIMELINE") as UserTimelineViewController
+    self.navigationController?.pushViewController(userTimelineVC, animated: true)
+
+  }
+  
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
