@@ -18,7 +18,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   
   override func viewDidLoad() {
     super.viewDidLoad()
-          
+    
+//    self.navigationController?.navigationBar.barTintColor = UIColor.blueColor()
+    
     self.tableView.dataSource = self
     self.tableView.delegate = self
     self.tableView.registerNib(UINib(nibName: "TweetCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "TWEET_CELL")
@@ -42,6 +44,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("TWEET_CELL", forIndexPath: indexPath) as TweetCell
+    cell.tweetImageView.image = nil
+      // Setting nil creates a tableView with no images after scrolling, but may be better than the alternative
     let tweet = self.tweets[indexPath.row]
     cell.tweetLabel.text = tweet.text
     cell.userNameLabel.text = tweet.username
@@ -51,6 +55,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.tweetImageView.image = tweet.image
       })
     }
+    cell.tweetImageView.layer.masksToBounds = true
+    cell.tweetImageView.layer.cornerRadius = 6.0
+    cell.tweetImageView.layer.borderColor = UIColor.whiteColor().CGColor
+    cell.tweetImageView.layer.borderWidth = 0.0
+    
     return cell
   }
   

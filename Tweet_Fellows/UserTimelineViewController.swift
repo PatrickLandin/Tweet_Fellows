@@ -22,7 +22,7 @@ class UserTimelineViewController: UIViewController, UITableViewDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-      self.userBackgroundView.image = self.userTweet.image
+//      self.userBackgroundView.image = self.userTweet.image
       self.headerNameLabel.text = self.userTweet.username
       self.headerImageView.image = self.userTweet.image
       self.headerLocationLabel.text = self.userTweet.userLocation
@@ -36,9 +36,13 @@ class UserTimelineViewController: UIViewController, UITableViewDataSource {
         self.tableView.reloadData()
       })
       
-      self.networkController.fetchUserBackgroundImage(self.userTweet, completionHandler: { (image) -> () in
-        self.userBackgroundView.image = image
-        self.tableView.reloadData()
+//      self.networkController.fetchUserBackgroundImage(self.userTweet, completionHandler: { (image) -> () in
+//        self.userBackgroundView.image = image
+//        self.tableView.reloadData()
+//      })
+      
+      self.networkController.fetchProfileHeader(self.userTweet, completionHandler: { (image) -> () in
+        self.userBackgroundView.image = self.userTweet.bannerImage
       })
     }
   
@@ -62,6 +66,15 @@ class UserTimelineViewController: UIViewController, UITableViewDataSource {
         cell.tweetImageView.image = tweet.image
       })
     }
+    cell.tweetImageView.layer.masksToBounds = true
+    cell.tweetImageView.layer.cornerRadius = 6.0
+    cell.tweetImageView.layer.borderColor = UIColor.whiteColor().CGColor
+    cell.tweetImageView.layer.borderWidth = 0.0
+    self.headerImageView.layer.masksToBounds = true
+    self.headerImageView.layer.cornerRadius = 6.0;
+    self.headerImageView.layer.borderColor = UIColor.whiteColor().CGColor
+    self.headerImageView.layer.borderWidth = 2.0;
+    
     return cell
   }
     override func didReceiveMemoryWarning() {

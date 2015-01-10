@@ -30,6 +30,9 @@ class TweetDetailController: UIViewController {
         self.tweetFaveLabel.text = self.tweet.favoriteCount
         }
       })
+      self.userPictureButton.layer.masksToBounds = true
+      self.userPictureButton.layer.cornerRadius = 8.0
+
         // Do any additional setup after loading the view.
     }  //VDL
 

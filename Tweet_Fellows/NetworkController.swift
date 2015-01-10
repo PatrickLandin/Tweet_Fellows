@@ -91,19 +91,19 @@ class NetworkController {
     }
   }
   
-  func fetchUserBackgroundImage(tweet : Tweet, completionHandler: (UIImage?) -> ()) {
-    // Image download
-    if let imageURL = NSURL(string: tweet.userBackground) {
-      self.imageQueue.addOperationWithBlock({ () -> Void in
-        if let backgroundImageData = NSData(contentsOfURL: imageURL) {
-          tweet.backgroundImage = UIImage(data: backgroundImageData)
-          NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-            completionHandler(tweet.backgroundImage)
-          })
-        }
-      })
-    }
-  }
+//  func fetchUserBackgroundImage(tweet : Tweet, completionHandler: (UIImage?) -> ()) {
+//    // Image download
+//    if let imageURL = NSURL(string: tweet.userBackground) {
+//      self.imageQueue.addOperationWithBlock({ () -> Void in
+//        if let backgroundImageData = NSData(contentsOfURL: imageURL) {
+//          tweet.backgroundImage = UIImage(data: backgroundImageData)
+//          NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+//            completionHandler(tweet.backgroundImage)
+//          })
+//        }
+//      })
+//    }
+//  }
   
   func fetchUserTimeline(userID : String, completionHandler : ([Tweet]?, String?) -> ()) {
     let requestURL = NSURL(string: "https://api.twitter.com/1.1/statuses/user_timeline.json?user_id=\(userID)")
@@ -135,4 +135,35 @@ class NetworkController {
       }
     }
   }
-}
+  
+  func fetchProfileHeader (tweet : Tweet, completionHandler: (image: UIImage?) -> ()) {
+    let requestURL = NSURL(string: "https://api.twitter.com/1.1/users/profile_banner.json?screen_name=\(tweet.screenName)")
+    let twitterRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: requestURL, parameters: nil)
+    twitterRequest.account = self.twitterAccount
+    twitterRequest.performRequestWithHandler() { (data, response, error) -> Void in
+      switch response.statusCode {
+      case 200...299:
+        println("fetch tweet banner worked brilliantly")
+        
+          if let jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? [String : AnyObject] {
+            
+            if let sizes = jsonResult["sizes"] as? [String : AnyObject] {
+              if let webRetina = sizes["web_retina"] as? [String : AnyObject] {
+                var bannerURL = webRetina["url"] as String
+                
+                if let imageData = NSData(contentsOfURL: NSURL(string: bannerURL)!) {
+                  tweet.bannerImage = UIImage(data: imageData)
+                }
+                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                  completionHandler(image: tweet.bannerImage)
+              })
+            }
+          }
+        }
+          default:
+            println("default thing happened a bit for banner method")
+          }
+        }
+      }
+  
+} // fin
