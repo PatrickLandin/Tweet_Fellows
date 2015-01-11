@@ -44,16 +44,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("TWEET_CELL", forIndexPath: indexPath) as TweetCell
-//    cell.tweetImageView.image = nil
-      // Setting nil creates a tableView with no images after scrolling, but may be better than the alternative
     let tweet = self.tweets[indexPath.row]
     cell.tweetLabel.text = tweet.text
     cell.userNameLabel.text = tweet.username
     if tweet.image == nil {
       self.networkController.fetchImageForTweet(tweet, completionHandler: { (image) -> (Void) in
-//        self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
         cell.tweetImageView.image = tweet.image
       })
+    } else {
+      cell.tweetImageView?.image = tweet.image?
     }
     cell.tweetImageView.layer.masksToBounds = true
     cell.tweetImageView.layer.cornerRadius = 6.0
@@ -62,6 +61,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     return cell
   }
+  
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     let tweetVC = self.storyboard?.instantiateViewControllerWithIdentifier("TWEET_VC") as TweetDetailController

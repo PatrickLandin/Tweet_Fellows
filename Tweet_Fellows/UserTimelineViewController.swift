@@ -22,7 +22,6 @@ class UserTimelineViewController: UIViewController, UITableViewDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//      self.userBackgroundView.image = self.userTweet.image
       self.headerNameLabel.text = self.userTweet.username
       self.headerImageView.image = self.userTweet.image
       self.headerLocationLabel.text = self.userTweet.userLocation
@@ -35,11 +34,6 @@ class UserTimelineViewController: UIViewController, UITableViewDataSource {
         self.userTweets = tweets
         self.tableView.reloadData()
       })
-      
-//      self.networkController.fetchUserBackgroundImage(self.userTweet, completionHandler: { (image) -> () in
-//        self.userBackgroundView.image = image
-//        self.tableView.reloadData()
-//      })
       
       self.networkController.fetchProfileBanner(self.userTweet, completionHandler: { (image) -> () in
         self.userBackgroundView.image = self.userTweet.bannerImage
