@@ -41,7 +41,7 @@ class UserTimelineViewController: UIViewController, UITableViewDataSource {
 //        self.tableView.reloadData()
 //      })
       
-      self.networkController.fetchProfileHeader(self.userTweet, completionHandler: { (image) -> () in
+      self.networkController.fetchProfileBanner(self.userTweet, completionHandler: { (image) -> () in
         self.userBackgroundView.image = self.userTweet.bannerImage
       })
     }

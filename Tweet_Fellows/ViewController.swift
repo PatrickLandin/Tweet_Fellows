@@ -44,7 +44,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("TWEET_CELL", forIndexPath: indexPath) as TweetCell
-    cell.tweetImageView.image = nil
+//    cell.tweetImageView.image = nil
       // Setting nil creates a tableView with no images after scrolling, but may be better than the alternative
     let tweet = self.tweets[indexPath.row]
     cell.tweetLabel.text = tweet.text

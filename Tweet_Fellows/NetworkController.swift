@@ -136,7 +136,7 @@ class NetworkController {
     }
   }
   
-  func fetchProfileHeader (tweet : Tweet, completionHandler: (image: UIImage?) -> ()) {
+  func fetchProfileBanner (tweet : Tweet, completionHandler: (image: UIImage?) -> ()) {
     let requestURL = NSURL(string: "https://api.twitter.com/1.1/users/profile_banner.json?screen_name=\(tweet.screenName)")
     let twitterRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: requestURL, parameters: nil)
     twitterRequest.account = self.twitterAccount
