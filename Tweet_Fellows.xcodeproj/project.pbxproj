@@ -142,8 +142,8 @@
 			children = (
 				EC7592891A5B3703000DC445 /* Main.storyboard */,
 				EC3601E51A5F4129008BA6FB /* TweetCell.xib */,
-				EC75928E1A5B3703000DC445 /* LaunchScreen.xib */,
 				ECAD57B31A5B3DBE00945F74 /* TweetCell.swift */,
+				EC75928E1A5B3703000DC445 /* LaunchScreen.xib */,
 				ECAD57B91A5C99E400945F74 /* AustinJackson.png */,
 			);
 			name = Views;

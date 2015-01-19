@@ -18,14 +18,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-//    self.navigationController?.navigationBar.barTintColor = UIColor.blueColor()
-    
+
     self.tableView.dataSource = self
     self.tableView.delegate = self
     self.tableView.registerNib(UINib(nibName: "TweetCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "TWEET_CELL")
     self.tableView.estimatedRowHeight = 100
-
     self.tableView.rowHeight = UITableViewAutomaticDimension
     
     self.networkController.fetchHomeTimeline { (tweets, errorString) -> () in

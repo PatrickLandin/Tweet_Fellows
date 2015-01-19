@@ -55,8 +55,6 @@ class UserTimelineViewController: UIViewController, UITableViewDataSource {
     cell.userNameLabel.text = tweet.username
     if tweet.image == nil {
       self.networkController.fetchImageForTweet(tweet, completionHandler: { (image) -> (Void) in
-        //        self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
-        //        this was causing scrolling issues in app, shooting user back to top of table.
         cell.tweetImageView.image = tweet.image
       })
     }

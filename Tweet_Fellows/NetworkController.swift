@@ -91,20 +91,6 @@ class NetworkController {
     }
   }
   
-//  func fetchUserBackgroundImage(tweet : Tweet, completionHandler: (UIImage?) -> ()) {
-//    // Image download
-//    if let imageURL = NSURL(string: tweet.userBackground) {
-//      self.imageQueue.addOperationWithBlock({ () -> Void in
-//        if let backgroundImageData = NSData(contentsOfURL: imageURL) {
-//          tweet.backgroundImage = UIImage(data: backgroundImageData)
-//          NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-//            completionHandler(tweet.backgroundImage)
-//          })
-//        }
-//      })
-//    }
-//  }
-  
   func fetchUserTimeline(userID : String, completionHandler : ([Tweet]?, String?) -> ()) {
     let requestURL = NSURL(string: "https://api.twitter.com/1.1/statuses/user_timeline.json?user_id=\(userID)")
     let twitterRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: requestURL, parameters: nil)
